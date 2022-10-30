@@ -32,8 +32,8 @@ function Signup() {
     }
   }, []);
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state.signUpReducer);
   
+  const selector = useSelector((state) => state.signUpReducer);
   const setNameInput = (val) => {
     dispatch(setName(val));
   };

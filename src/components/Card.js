@@ -2,14 +2,25 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Products from '../screens/Products';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {AddtoCartAction,RemovetoCartAction} from '../store/actions/products'
+import { disableNetwork } from 'firebase/firestore';
 
 
 function CardCmp({product,removeBtn}) {
   const dispatch = useDispatch();
+  const user = localStorage.getItem("uid");
+  
   console.log("product", product);
-  const addToCart = () => {
-    dispatch(AddtoCartAction(product));
+  const addToCart = (e) => {
+    if (user){
+      dispatch(AddtoCartAction(product));
+    }
+else{
+  e.disabled = true;
+  alert("Login First !!!");
+}
+   
   };
   const removeToCart = () => {
     dispatch(RemovetoCartAction(product));
@@ -28,7 +39,8 @@ function CardCmp({product,removeBtn}) {
             Remove to cart
           </Button>
         ) : (
-          <Button variant="primary" onClick={addToCart}>
+          
+          <Button  variant="primary" onClick={addToCart}>
             Add to Cart
           </Button>
         )}

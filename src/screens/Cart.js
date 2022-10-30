@@ -3,11 +3,21 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import CardCmp from "../components/Card";
 import NavbarCmp from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AddToCart = () => {
   const { cartItem } = useSelector((state) => state.AddToCartReducer);
 
   console.log(cartItem, "cartItem");
+  const user = localStorage.getItem("uid");
+   const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+      alert("Login First !!!")
+    }
+  }, []);
   return (
     <div>
       <NavbarCmp/>

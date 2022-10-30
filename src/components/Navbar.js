@@ -1,12 +1,23 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/brand.png'
-import { FaUserAlt,FaShoppingCart } from "react-icons/fa";
+import { FaUserAlt,FaShoppingCart,FaUserTimes } from "react-icons/fa";
+import { Button } from 'react-bootstrap';
+
+ 
 
 function NavbarCmp() {
-  return (
+ 
+  const user = localStorage.getItem("uid");
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    localStorage.removeItem("uid");
+   
+    navigate("/");
+  };
+ return (
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
@@ -16,7 +27,10 @@ function NavbarCmp() {
            <Link className='nav' to="/products">Products</Link>
           </Nav>
           <Nav>
-          <Link className='nav' to="/login"><FaUserAlt/> </Link>
+            {user? (
+             <Button onClick={logoutHandler} className='nav text-center'>Logout</Button> 
+            ): <Link className='nav' to="/login"><FaUserAlt/> </Link>}
+         
           <Link className='nav' to="/cart"><FaShoppingCart/></Link>
             
             

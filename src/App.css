@@ -9,6 +9,10 @@
     text-decoration: none;
     font-family: 'Updock', cursive;
     font-weight: bold;
+    margin: 5px;
+}
+.logout{
+  padding: 10px;
 }
 
 /* LOGIN */

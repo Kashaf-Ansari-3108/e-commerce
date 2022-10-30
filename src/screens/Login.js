@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../assets/brand.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setPwd, loginUserAction} from "../store/actions/login";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -15,6 +17,14 @@ import { Link } from "react-router-dom";
 function Login() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.loginReducer);
+  const user = localStorage.getItem("uid");
+   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/products");
+      
+    }
+  }, []);
 
   const setEmailInput = (val) => {
     dispatch(setEmail(val));
